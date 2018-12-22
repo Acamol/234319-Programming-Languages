@@ -1,6 +1,3 @@
-(* Aviad Gafni aviadgafni@campus.technion.ac.il 301836540 *)
-(* Omri Zohar 204626261 ry@campus.technion.ac.il *)
-
 datatype characteristic = Char of string list;
 datatype puzzle = Puzzle of characteristic list * (db -> db)
     withtype db = string list list;

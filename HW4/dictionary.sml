@@ -1,6 +1,3 @@
-(* Aviad Gafni aviadgafni@campus.technion.ac.il 301836540 *)
-(* Omri Zohar 204626261 ry@campus.technion.ac.il *)
-
 infix 2 --;
 fun key -- value = (key, value);
 

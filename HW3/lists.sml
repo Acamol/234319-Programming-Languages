@@ -1,6 +1,3 @@
-(* Aviad Gafni aviadgafni@campus.technion.ac.il 301836540 *)
-(* Omri Zohar *)
-
 (* ex1 *)
 infix at;
 fun l at idx = List.hd(List.drop(l, idx));
