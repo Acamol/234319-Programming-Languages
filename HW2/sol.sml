@@ -1,3 +1,5 @@
+(* Aviad Gafni 301836540 aviadgafni@campus.technion.ac.il Omri Zohar 204626261 ry@campus.technion.ac.il *)
+
 (* ex1 *)
 fun assertThat x f y =
     f y x = true

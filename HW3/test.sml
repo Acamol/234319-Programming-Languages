@@ -1,0 +1,23 @@
+Control.Print.printDepth := 100;
+infix ++;
+fun solution ++ connection = trueConnection solution connection;
+infix +!;
+fun solution +! connection = falseConnection solution connection;
+
+riddle 5;
+it ++ (Connection ["Brit", "Red", "", "", ""]);
+it ++ (Connection ["Swede", "", "Dogs", "", ""]);
+it ++ (Connection ["Dane", "", "Horses", "Tea", ""]);
+it ++ (Connection ["", "Green", "", "Coffee", ""]);
+it ++ (Connection ["", "White", "", "Beer", "BlueMaster"]);
+it ++ (Connection ["Norwegian", "", "", "", "Dunhill"]);
+it ++ (Connection ["", "", "Birds", "Milk" ,"Pall Mall"]);
+it ++ (Connection ["German", "", "", "", "Prince"]);
+it ++ (Connection ["", "White", "", "", ""]);
+it ++ (Connection ["", "", "Fish", "", ""]);
+it +! (Connection ["", "", "Cats", "", "Blend"]);
+it +! (Connection ["Norwegian", "Blue", "", "", ""]);
+it +! (Connection ["", "Yellow", "Horses", "", ""]);
+it +! (Connection ["German", "", "Cats", "", ""]);
+it +! (Connection ["", "", "", "Water", "Prince"]);
+solve it;
