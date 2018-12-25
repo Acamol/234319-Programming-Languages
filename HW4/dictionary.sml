@@ -9,7 +9,7 @@ fun keys (dict d)  =
 ;
 
 fun values (dict d) =
-    map (fn (_, value) => value)
+    map (fn (_, value) => value) d
 ;
 
 fun access (dict d) key =
