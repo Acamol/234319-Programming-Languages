@@ -65,6 +65,7 @@ in
 end;
 
 local
+    exception FAIL of string
     fun is_atomic NIL     = T
     |   is_atomic (INT _) = T
     |   is_atomic (STR _) = T
@@ -83,6 +84,11 @@ local
             EQ_internal (car1, car2) andalso EQ_internal (cdr1, cdr2)
     |   EQ_internal (_, _) =
             false
+    ;
+
+    fun count_args NIL = 0
+    |   count_args args =
+            1 + count_args (CDR args NIL)
     ;
 
 in
@@ -108,25 +114,6 @@ in
     |   LST _ (env : S) = NIL
     ;
 
-    (* ex5 *)
-    fun COND (first, second : S, third : S) (env : S) =
-        if EQ_internal(first, NIL) then
-            third
-        else
-            second
-    ;
-end;
-
-(* ex8 *)
-local
-    exception FAIL of string;
-
-    fun count_args NIL = 0
-    |   count_args args =
-            1 + count_args (CDR args NIL)
-    ;
-
-in
     fun EVAL (NIL, _) =
             NIL
     |   EVAL (INT s, _) =
@@ -149,7 +136,7 @@ in
             if count_args args <> 3 then
                 raise FAIL "EVAL:: function is TRINARY but the number of arguments is not 3"
             else
-                f (EVAL(CAR args NIL, env), EVAL(CDR (CAR args NIL) NIL, env), EVAL(CAR (CDR (CDR args NIL) NIL) NIL, env)) env
+                f (EVAL(CAR args NIL, env), EVAL(CAR (CDR args NIL) NIL, env), EVAL(CAR (CDR (CDR args NIL) NIL) NIL, env)) env
 
     (* NORMAL functions *)
     |   EVAL (CONS(NORMAL (UNARY f), arg), env) =
@@ -166,9 +153,16 @@ in
             if count_args args <> 3 then
                 raise FAIL "EVAL:: function is TRINARY but the number of arguments is not 3"
             else
-                f (CAR args NIL, CDR (CAR args NIL) NIL, CAR (CDR (CDR args NIL) NIL) NIL) env
+                f (CAR args NIL, CAR (CDR args NIL) NIL, CAR (CDR (CDR args NIL) NIL) NIL) env
     |   EVAL (_, _) =
             raise FAIL "EVAL:: no type match found"
+
+    fun COND (first, second : S, third : S) (env : S) =
+        if EQ_internal(EVAL(first, env), NIL) then
+            EVAL(third, env)
+        else
+            EVAL(second, env)
+    ;
 end;
 
 (*
